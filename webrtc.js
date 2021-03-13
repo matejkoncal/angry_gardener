@@ -12,9 +12,9 @@ var connection = new RTCPeerConnection({
 		{
 			urls: 'turn:178.40.228.155:3478',
 			username: 'angrygardener',
-			credential: 'jamamkone',
-		},
-	],
+			credential: 'jamamkone'
+		}
+	]
 });
 var sendChannel = connection.createDataChannel('sendChannel');
 connection.ondatachannel = ondatachannel;
