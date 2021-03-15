@@ -1,0 +1,23 @@
+{
+  "name": "angry_gardener",
+  "version": "1.0.0",
+  "description": "server for game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matejkoncal/angry_gardener.git"
+  },
+  "author": "Matej Koncal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matejkoncal/angry_gardener/issues"
+  },
+  "homepage": "https://github.com/matejkoncal/angry_gardener#readme",
+  "dependencies": {
+    "opn": "^6.0.0"
+  }
+}
