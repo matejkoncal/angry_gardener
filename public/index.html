@@ -1,55 +1,18 @@
-<html>
-	<head>
-		<title>Web RTC</title>
-		<style>
-			#map {
-				height: 500px;
-				width: 500px;
-				background-color: red;
-			}
-			#localPlayer {
-				height: 50px;
-				width: 50px;
-				background-color: blue;
-				position: relative;
-				left: 30;
-				top: 250;
-			}
-			#remotePlayer {
-				height: 50px;
-				width: 50px;
-				background-color: orange;
-				position: relative;
-				left: 350;
-				top: 200;
-			}
-		</style>
-	</head>
-	<body>
-		<input type="radio" name="options" id="join" />Join<br />
-		<input
-			type="radio"
-			name="options"
-			id="create"
-			onclick="generateDescription()"
-		/>Create<br />
-		<p>Local serialized description:</p>
-		<div id="localDescription"></div>
-		<br />
-		<input
-			type="text"
-			id="remoteDescription"
-			placeholder="Remote description"
-		/><br /><br />
-		<button onclick="setConnection()">Submit</button><br /><br />
-		<input type="text" id="messageInput" /><br /><br />
-		<button onclick="sendMessage()">SendMessage</button><br />
+<!DOCTYPE html>
+<html> 
 
-		<div id="map">
-			<div id="localPlayer"></div>
-			<div id="remotePlayer"></div>
-		</div>
+<head>
+    <script src="phaser.js"></script>
+    <script src="MainScene.js"></script>
+    <script src="game.js"></script>
+</head>
 
-		<script src="./webrtc.js"></script>
-	</body>
+<body>
+    <button id="button_create_game">Create game</button>
+    <button id="button_join_game">Join game</button>
+    <button id="button_set_answer">Set answer</button>
+    <input id="input_token" type="text"/>
+    <div id="text_token"></div>
+</body>
+
 </html>
