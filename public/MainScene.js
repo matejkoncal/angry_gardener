@@ -49,14 +49,13 @@ class MainScene extends Phaser.Scene {
         this.peerConnection.ondatachannel = (remoteChannel) => {
             remoteChannel.channel.onmessage = (message) => {
                 var recievedObject = JSON.parse(message.data);
-
                 var currentNumber = recievedObject.number;
                 var diff = currentNumber - this.lastnNumber;
+                this.lastnNumber = currentNumber;
 
-                if (diff == 1) {
-                    this.buffer.push(recievedObject.position);
-                } else {
-                    this.buffer.push(recievedObject.position); // only for debug
+                this.buffer.push(recievedObject.position);
+
+                if (diff != 1) {
                     console.log(`omitted message. Difference: ${diff}`);
                 }
             }
