@@ -5,6 +5,9 @@ class MainScene extends Phaser.Scene {
         this.speed = 10;
         this.iceCandidates = [];
         this.isChannelOpen = false;
+        this.buffer = [];
+        this.counter = 1;
+        this.lastnNumber = 0;
 
         const config = {
             'iceServers': [
@@ -45,10 +48,16 @@ class MainScene extends Phaser.Scene {
 
         this.peerConnection.ondatachannel = (remoteChannel) => {
             remoteChannel.channel.onmessage = (message) => {
-                var position = JSON.parse(message.data);
+                var recievedObject = JSON.parse(message.data);
+                var currentNumber = recievedObject.number;
+                var diff = currentNumber - this.lastnNumber;
+                this.lastnNumber = currentNumber;
 
-                this.player2.x = position.x;
-                this.player2.y = position.y;
+                this.buffer.push(recievedObject.position);
+
+                if (diff != 1) {
+                    console.log(`omitted message. Difference: ${diff}`);
+                }
             }
         }
 
@@ -91,7 +100,6 @@ class MainScene extends Phaser.Scene {
     }
 
     update(delta) {
-
         if (this.keyLeft.isDown) {
             this.player1.x -= this.speed;
         }
@@ -113,8 +121,26 @@ class MainScene extends Phaser.Scene {
             y: this.player1.y
         }
 
+        this.sendLocalPlayerPosition(position);
+        this.setRemotePlayerPosition();
+    }
+
+    setRemotePlayerPosition() {
+        if (this.buffer.length > 0) {
+            var remotePlayerPosition = this.buffer.shift();
+            this.player2.x = remotePlayerPosition.x;
+            this.player2.y = remotePlayerPosition.y;
+        }
+    }
+
+    sendLocalPlayerPosition(position) {
         if (this.isChannelOpen) {
-            this.dataChannel.send(JSON.stringify(position));
+            var data = {
+                position: position,
+                number: this.counter
+            };
+            this.dataChannel.send(JSON.stringify(data));
+            this.counter++;
         }
     }
 }
