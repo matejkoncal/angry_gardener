@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/matejkoncal/angry_gardener#readme",
   "dependencies": {
+    "express": "^4.17.1",
     "opn": "^6.0.0"
   }
 }
